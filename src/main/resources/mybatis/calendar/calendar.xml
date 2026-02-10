@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seinfo.wbs.component.calendar.mapper.CalendarMapper">
+
+	<select id="selectTotalSchuleList" parameterType="camelmap" resultType="camelmap">
+        SELECT
+               a.calendar_no
+             , a.calendar_date AS date
+             , s.schedule_no
+             , s.schedule_content AS title
+             , s.schedule_sort
+             , s.schedule_type
+         FROM qoo_calendar a
+         JOIN qoo_calendar_schedule s
+           ON a.calendar_no = s.calendar_no
+        WHERE a.calendar_date BETWEEN #{startDate} AND #{endDate}
+     ORDER BY s.calendar_no, s.schedule_no ASC
+    </select>
+
+    <select id="selectCalendarList" resultType="camelmap">
+        SELECT
+               calendar_no
+             , calendar_date AS date
+             , schedule_yn
+             , schedule_time
+        FROM qoo_calendar
+        WHERE calendar_date BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+	<insert id="insertUpdateCalendar" parameterType="camelmap">
+		INSERT INTO
+            qoo_calendar
+		(
+		     calendar_no
+		   , calendar_date
+		   , schedule_yn
+		   , schedule_time
+		   , reg_dt
+           , reg_user_id
+		) VALUES (
+		     #{calendarNo}
+			,#{calendarDate}
+			,#{scheduleYn}
+			,#{scheduleTime}
+			,now()
+            ,#{userEmail}
+		) ON DUPLICATE KEY UPDATE
+		    schedule_yn = VALUES(schedule_yn)
+          , schedule_time = VALUES(schedule_time)
+		  , mod_dt = now()
+		  , mod_user_id = VALUES(mod_user_id)
+          , calendar_no = VALUES(calendar_no)
+	</insert>
+
+    <select id="getLastInsertId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <insert id="insertUpdateSchedule">
+        INSERT INTO qoo_calendar_schedule
+        (
+            schedule_no,
+            calendar_no,
+            schedule_sort,
+            schedule_type,
+            schedule_content,
+            reg_dt
+        )
+        VALUES
+        <foreach collection="list" item="row" separator=",">
+            (
+                #{row.scheduleNo, jdbcType=BIGINT},    -- 신규면 null 가능
+                #{row.calendarNo, jdbcType=BIGINT},
+                #{row.scheduleSort, jdbcType=VARCHAR},
+                #{row.scheduleType, jdbcType=VARCHAR},
+                #{row.scheduleContent, jdbcType=VARCHAR},
+                NOW()
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        schedule_sort    = VALUES(schedule_sort),
+        schedule_type    = VALUES(schedule_type),
+        schedule_content = VALUES(schedule_content),
+        mod_dt           = NOW()
+    </insert>
+
+    <select id="selectCalendar" resultType="camelmap">
+        SELECT
+               calendar_no
+             , calendar_date
+             , schedule_yn
+             , schedule_time
+        FROM qoo_calendar
+        WHERE calendar_no=#{calendarNo}
+    </select>
+
+    <select id="selectScheduleList" resultType="camelmap">
+        SELECT
+               schedule_no
+             , schedule_sort
+             , schedule_type
+             , schedule_content
+        FROM qoo_calendar_schedule
+       WHERE calendar_no=#{calendarNo}
+    ORDER BY schedule_no ASC
+    </select>
+
+    <delete id="deleteSchedule">
+        DELETE FROM qoo_calendar_schedule
+        WHERE schedule_no IN
+            <foreach collection="nos" item="no" open="(" separator="," close=")">
+                #{no}
+            </foreach>
+    </delete>
+
+    <select id="countByCalendarNo" resultType="int">
+        SELECT COUNT(*) FROM qoo_calendar_schedule WHERE calendar_no = #{calendarNo}
+    </select>
+
+    <delete id="deleteCalendar">
+        DELETE FROM qoo_calendar WHERE calendar_no = #{calendarNo}
+    </delete>
+
+</mapper>

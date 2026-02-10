@@ -1,0 +1,142 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.10'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.github.node-gradle.node' version '7.0.2'
+}
+
+group = 'com.seinfo'
+version = '0.0.1-SNAPSHOT'
+description = 'webster'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // JJWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.13.0'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.13.0'
+
+    implementation("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
+
+    implementation("me.desair.tus:tus-java-server:1.0.0-3.0")
+    implementation("com.github.ben-manes.caffeine:caffeine:3.2.2")
+    implementation('io.netty:netty-all:4.2.5.Final')
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// -------------------- 경로 변수 --------------------
+def frontendDir = "$projectDir/src/frontend"
+def distDir     = "$frontendDir/dist"
+def staticDir   = "$projectDir/src/main/resources/static"
+
+// -------------------- Node 플러그인 --------------------
+node {
+    version = '24.13.0'
+    npmVersion = '11.2.0'
+    download = true
+    workDir = layout.buildDirectory.dir("nodejs").get().asFile
+    npmWorkDir = layout.buildDirectory.dir("npm").get().asFile
+    nodeProjectDir = file("$projectDir/src/frontend")
+}
+
+// -------------------- 태스크 타입 import --------------------
+import com.github.gradle.node.npm.task.NpmTask
+import com.github.gradle.node.npm.task.NpmInstallTask
+
+// -------------------- 프론트 존재 여부 --------------------
+def hasFrontend = file("${frontendDir}/package.json").exists()
+
+// -------------------- 1) npm install/ci --------------------
+tasks.register('frontendNpmInstall', NpmInstallTask) {
+    onlyIf { hasFrontend }
+    workingDir = file(frontendDir)
+    // 로그 상세
+    environment.put('NPM_CONFIG_LOGLEVEL', 'verbose')
+    // peerDependency 충돌 해결을 위해 legacy-peer-deps 추가
+    args = ['install', '--legacy-peer-deps']
+    // lock 파일 있으면 ci 사용하고 싶다면 아래 주석 해제
+    // npmCommand = ['ci']
+}
+
+// -------------------- (선택) static 전체 삭제 --------------------
+tasks.register('cleanStatic', Delete) {
+    description = "Clean src/main/resources/static before copying frontend assets"
+    delete fileTree(staticDir) {
+        include '**/*'
+        // exclude 'favicon.ico', 'robots.txt' // 보호 파일이 있으면 제외
+    }
+}
+
+// -------------------- 2) npm run build --------------------
+tasks.register('frontendBuild', NpmTask) {
+    onlyIf { hasFrontend }
+    dependsOn 'frontendNpmInstall'
+    workingDir = file(frontendDir)
+    args = ['run', 'build', '--force']
+
+    // 증분 빌드 캐시
+    inputs.files fileTree("${frontendDir}/src")
+    inputs.files fileTree("${frontendDir}/public")
+    inputs.file  "${frontendDir}/package.json"
+    inputs.file  "${frontendDir}/package-lock.json"
+    outputs.dir  distDir
+}
+
+// -------------------- 3) dist → static 동기화 --------------------
+tasks.register('copyFrontend', Sync) {
+    onlyIf { hasFrontend }
+    // 반드시 cleanStatic → frontendBuild 이후 실행
+    dependsOn 'cleanStatic', 'frontendBuild'
+    from(distDir)
+    into(staticDir)
+    includeEmptyDirs = false
+}
+
+// -------------------- (옵션) watch 태스크 --------------------
+tasks.register('frontendBuildWatch', NpmTask) {
+    dependsOn 'frontendNpmInstall'
+    workingDir = file(frontendDir)
+    args = ['run', 'build', '--', '--watch']
+    environment.put('NODE_ENV', 'production')
+    environment.put('NPM_CONFIG_LOGLEVEL', 'verbose')
+    outputs.upToDateWhen { false } // 프로세스 유지
+}
+
+tasks.register('copyFrontendOnChange', Sync) {
+    from(distDir)
+    into(staticDir)
+    includeEmptyDirs = false
+    inputs.dir(distDir)
+    outputs.dir(staticDir)
+}
+
+// -------------------- 4) 패키징/리소스 훅 --------------------
+if (hasFrontend) {
+    tasks.named('processResources') { dependsOn 'copyFrontend' }
+    tasks.named('bootJar')          { dependsOn 'copyFrontend' }
+}
