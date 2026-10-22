@@ -80,28 +80,28 @@ public class JwtRefreshFilter extends OncePerRequestFilter {
             HttpServletRequest req = attrs.getRequest();
             String ip = req.getHeader("X-Forwarded-For");
 
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null ||ip.isEmpty()|| "unknown".equalsIgnoreCase(ip)) {
                 ip = req.getHeader("Proxy-Client-IP");
             }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
                 ip = req.getHeader("Wl-Proxy-Client-IP");
             }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
                 ip = req.getHeader("HTTP_CLIENT_IP");
             }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.isEmpty()|| "unknown".equalsIgnoreCase(ip)) {
                 ip = req.getHeader("HTTP_X_FORWARDED_FOR");
             }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
                 ip = req.getHeader("X-Real-IP");
             }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.isEmpty()|| "unknown".equalsIgnoreCase(ip)) {
                 ip = req.getHeader("X-RealIP");
             }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
                 ip = req.getHeader("REMOTE_ADDR");
             }
-            if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
                 ip = req.getRemoteAddr();
             }
 

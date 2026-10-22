@@ -1,23 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'remixicon/fonts/remixicon.css';
-import 'react-calendar/dist/Calendar.css';
-// @ts-ignore
+import "material-symbols";
 import "swiper/css";
-// @ts-ignore
 import "swiper/css/bundle";
+
+// Styles
+import "./styles/style.scss";
+
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-tabs/style/react-tabs.css';
 
-// Styles
-import "./assets/styles/style.css";
-
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
 import App from './App.tsx'
 import reportWebVitals from './reportWebVitals';
+//import {BrowserRouter} from "react-router-dom";
+import {StrictMode} from "react";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

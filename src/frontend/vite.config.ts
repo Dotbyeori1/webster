@@ -10,6 +10,20 @@ const BACKEND = 'http://localhost'
 
 export default defineConfig({
   plugins: [react()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: [
+          'import',
+          'global-builtin',
+          'color-functions',
+          'if-function',
+          'color-module-compat',
+        ],
+        quietDeps: true,
+      },
+    },
+  },
   resolve: {
     alias: { '@': path.resolve(__dirname, './src') }
   },
