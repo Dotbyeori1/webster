@@ -1,0 +1,49 @@
+/* Funfacts Area Style
+============================================*/
+.funfacts-single-item {
+    text-align: center;
+    h2 {
+        font-size: 48px;
+        margin-bottom: 8px;
+        line-height: 1;
+    }
+    p {
+        font-size: 16px;
+    }
+}
+
+/* Max width 767px */
+@media only screen and (max-width: 767px) {
+    .funfacts-single-item {
+        h2 {
+            font-size: 35px;
+        }
+        p {
+            font-size: 13px;
+        }
+    }
+}
+
+/* Min width 768px to Max width 992px */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .funfacts-single-item {
+        h2 {
+            font-size: 40px;
+        }
+        p {
+            font-size: 13px;
+        }
+    }
+}
+
+/* Min width 992px to Max width 1199px */
+@media only screen and (min-width: 992px) and (max-width: 1199px)  {
+    .funfacts-single-item {
+        h2 {
+            font-size: 50px;
+        }
+        p {
+            font-size: 15px;
+        }
+    }
+}

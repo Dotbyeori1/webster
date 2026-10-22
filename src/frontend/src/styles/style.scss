@@ -1,0 +1,99 @@
+/**
+@File: Trezo Template Styles
+
+* This file contains the styling for the actual template, this
+is the file you need to edit to change the look of the template.
+
+This files table contents are outlined below>>>>>
+
+*******************************************
+**/
+
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+// Required
+@import "../../node_modules/bootstrap/scss/functions";
+
+// Default variable overrides
+@import "./variables";
+
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/variables-dark";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+// Create your own map
+$custom-colors: (
+  "primary-div": $primary-div,
+  "primary-div-50": $primary-div-50,
+  "primary-50": $primary-50,
+  "primary-100": $primary-100,
+  "primary-200": $primary-200,
+  "success-60": $success-60,
+  "success-70": $success-70,
+  "danger-40": $danger-40,
+  "danger-50": $danger-50,
+  "danger-80": $danger-80,
+  "danger-90": $danger-90,
+  "danger-100": $danger-100,
+  "rating-color": $rating-color,
+  "card-text-c": $card-text-c,
+  "gray": $gray,
+  "gray-100": $gray-100,
+  "gray-200": $gray-200,
+  "gray-300": $gray-300,
+  "gray-light": $gray-light,
+  "border-color": $border-color,
+  "border-color-50": $border-color-50,
+  "body-color-50": $body-color-50,
+  "secondary-50": $secondary-50,
+  "secondary-60": $secondary-60,  
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size,
+);
+
+// Required Utilities Parts
+$utilities: (
+  "font-size": (
+    rfs: true,
+    property: font-size,
+    class: fs,
+    values: $font-sizes,
+  ),
+);
+
+// Required
+@import "../../node_modules/bootstrap/scss/maps";
+@import "../../node_modules/bootstrap/scss/root";
+
+// Optional Bootstrap components here
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/type";
+
+// Required
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Components
+@import "./components/global";
+@import "./components/navbar";
+@import "./components/banner";
+@import "./components/about";
+@import "./components/partners";
+@import "./components/features";
+@import "./components/dashboard-showcase";
+@import "./components/testimonials";
+@import "./components/use-cases";
+@import "./components/pricing";
+@import "./components/funfacts";
+@import "./components/cta";
+@import "./components/footer";

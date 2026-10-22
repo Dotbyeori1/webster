@@ -1,0 +1,135 @@
+/* ABout Area Style
+============================================*/
+.about-content {
+    h2 {
+        font-size: 40px;
+        letter-spacing: -1px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    .dec {
+        font-size: 16px;
+    }
+}
+.about-info-single-item {
+    &.mt-40 {
+        margin-top: 40px;
+    }
+    &.ms-30 {
+        margin-left: 30px;
+        transform: rotate(-3.688deg);
+        &.rotate5 {
+            transform: rotate(-5.358deg);
+        }
+    }
+    &.rotate2 {
+        transform: rotate(2.026deg);
+    }
+    box-shadow: 0px 10px 3px 0px rgba(176, 176, 176, 0.00), 0px 6px 3px 0px rgba(176, 176, 176, 0.03), 0px 4px 2px 0px rgba(176, 176, 176, 0.12), 0px 2px 2px 0px rgba(176, 176, 176, 0.20), 0px 0px 1px 0px rgba(176, 176, 176, 0.23);
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 7px;
+    transition: $transition;
+    h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    .icon {
+        width: 100px;
+        height: 80px;
+        border-radius: 7px;
+        background-color: #CDEFFF;
+        &.bg2 {
+            background-color: #FFCFE0;
+        }
+        &.bg3 {
+            background-color: #FFE966;
+        }
+        &.bg4 {
+            background-color: #88FFFE;
+        }
+    }
+    &:hover {
+        transform: rotate(0);
+        position: relative;
+        z-index: 1;
+        &.ms-30 {
+            transform: rotate(0);
+        }
+    }
+}
+
+/* Max width 767px */
+@media only screen and (max-width: 767px) {
+    .about-content {
+        h2 {
+            font-size: 25px;
+        }
+    }
+    .about-info-single-item {
+        margin: 20px 0 !important;
+        transform: unset !important;
+        padding: 10px;
+        h3 {
+            font-size: 15px;
+        }
+        &:last-child {
+            margin-bottom: 0 !important;
+        }
+    }
+}
+
+/* Min width 768px to Max width 992px */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .about-content {
+        h2 {
+            font-size: 30px;
+        }
+    }
+    .about-info-single-item {
+        margin: 20px 0 !important;
+        transform: unset !important;
+        padding: 15px;
+        h3 {
+            font-size: 16px;
+        }
+        &:last-child {
+            margin-bottom: 0 !important;
+        }
+    }
+}
+
+/* Min width 992px to Max width 1199px */
+@media only screen and (min-width: 992px) and (max-width: 1199px)  {
+    .about-content {
+        h2 {
+            font-size: 35px;
+        }
+    }
+}
+
+@media only screen and (min-width: 1399px) {
+    .about-content {
+        margin-left: 100px;
+        max-width: 480px;
+    }
+}
+
+/* RTL Area Style
+============================================*/
+[dir="rtl"] {
+    @media only screen and (min-width: 1399px) {
+        .about-content {
+            margin-left: 0;
+            margin-right: 100px;
+        }
+    }
+}   
+
+/* Dark Mode Area Style
+============================================*/ 
+[class="dark"] {
+    .about-info-single-item {
+        background-color: $dark-card-bg;
+    }
+}

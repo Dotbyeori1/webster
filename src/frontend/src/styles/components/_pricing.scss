@@ -1,0 +1,241 @@
+/* Pricing Area Style
+============================================*/
+.pricing-plans-content {
+    h2 {
+        font-size: 40px;
+        letter-spacing: -1px;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    .dec {
+        font-size: 16px;
+    }
+}
+.pricing-single-item {
+    padding: 40px 35px;
+    border-radius: 15px;
+    .title-wrap {
+        margin-bottom: 30px;
+    }
+    .title {
+        font-size: 20px;
+        display: block;
+    }
+    h2 {
+        font-size: 36px;
+        margin-top: 22px;
+        padding-bottom: 2px;
+        line-height: 1;
+        sub {
+            margin-bottom: 0;
+            font-size: 14px;
+            color: $body-color;
+            bottom: 0;
+            font-weight: 400;
+        }
+    }
+    .pricing-content {
+        background-color: $white;
+        padding: 30px;
+        padding-top: 30px;
+        border-radius: 15px;
+        .btn {
+            padding: 14.5px 24px;
+            &:hover {
+                background-color: $primary-100 !important;
+            }
+        }
+        ul {
+            margin: 30px 0;
+            li {
+                margin-bottom: 13px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                span {
+                    color: #434e61;
+                }
+            }
+        }
+    }
+    .popular {
+        background: linear-gradient(88deg, #FF4747 0.97%, #D800B9 91.99%);
+        display: inline-block;
+        padding: 4.5px 15px;
+        color: $white;
+        border-radius: 50px;
+    }
+}
+
+/* Max width 767px */
+@media only screen and (max-width: 767px) {
+    .pricing-plans-content {
+        h2 {
+            font-size: 25px;
+        }
+        .dec {
+            font-size: 14px;
+        }
+    }
+    .pricing-single-item {
+        padding: 20px;
+        .title-wrap {
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 16px !important;
+        }
+        h2 {
+            font-size: 30px;
+        }
+        .pricing-content {
+            padding: 15px;
+            p {
+                font-size: 14px;
+            }
+            ul {
+                margin-top: 15px;
+                li {
+                    gap: 10px !important;
+                    span {
+                        font-size: 14px;
+                    }
+                }
+            }
+            .btn {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+/* Min width 768px to Max width 992px */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .pricing-plans-content {
+        h2 {
+            font-size: 30px;
+        }
+        .dec {
+            font-size: 15px;
+        }
+    }
+    .pricing-single-item {
+        padding: 20px;
+        .title-wrap {
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 17px !important;
+        }
+        h2 {
+            font-size: 30px;
+        }
+        .pricing-content {
+            padding: 20px;
+            p {
+                font-size: 15px;
+            }
+            ul {
+                margin-top: 15px;
+                li {
+                    gap: 5px !important;
+                    span {
+                        font-size: 15px;
+                    }
+                }
+            }
+            .btn {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+/* Min width 992px to Max width 1199px */
+@media only screen and (min-width: 992px) and (max-width: 1199px)  {
+    .pricing-single-item {
+        padding: 15px;
+        .title {
+            font-size: 14px;
+        }
+        h2 {
+            font-size: 30px;
+        }
+        .pricing-content {
+            padding: 15px;
+            p {
+                font-size: 14px;
+            }
+            ul {
+                margin-top: 15px;
+                li {
+                    gap: 5px !important;
+                    span {
+                        font-size: 14px;
+                    }
+                }
+            }
+            .btn {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+/* Min width 1200px to Max width 1399px */
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .pricing-single-item {
+        padding: 15px;
+        .pricing-content {
+            padding: 15px;
+            p {
+                font-size: 14px;
+            }
+            ul {
+                margin-top: 15px;
+                li {
+                    gap: 5px !important;
+                    span {
+                        font-size: 14px;
+                    }
+                }
+            }
+            .btn {
+                margin-top: 0;
+            }
+        }
+    }
+}  
+
+@media only screen and (min-width: 1200px) {
+    .pricing-plans-content {
+        .dec {
+            max-width: 360px;
+        }
+    }
+}
+
+/* Dark Mode Area Style
+============================================*/ 
+[class="dark"] {
+    .pricing-single-item {
+        background: $dark-card-bg !important;
+        .pricing-content {
+            background-color: $dark-body-bg;
+            ul {
+                li {
+                    img {
+                        filter: brightness(100);
+                    }
+                    span {
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+    .pricing-area {
+        background-image: unset !important;
+        background-color: $dark-input-bg;
+    }
+}

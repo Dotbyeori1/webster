@@ -1,0 +1,56 @@
+/* Blank Area Style
+============================================*/
+.trezo-users-single-item {
+    box-shadow: 21px 85px 24px 0px rgba(176, 176, 176, 0.00), 13px 54px 22px 0px rgba(176, 176, 176, 0.02), 8px 30px 19px 0px rgba(176, 176, 176, 0.06), 3px 14px 14px 0px rgba(176, 176, 176, 0.11), 1px 3px 8px 0px rgba(176, 176, 176, 0.13);
+    padding: 15px;
+    padding-right: 35px;
+    gap: 20px;
+    .icon {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+/* Max width 767px */
+@media only screen and (max-width: 767px) {
+    .trezo-users-single-item {
+        padding: 10px;
+        padding-right: 25px;
+        gap: 10px;
+        span {
+            font-size: 16px;
+        }
+    }
+    .trezo-users-wrap {
+        gap: 10px;
+    }
+}
+
+/* Min width 768px to Max width 992px */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .trezo-users-single-item {
+        padding: 10px;
+        padding-right: 25px;
+        gap: 10px;
+        span {
+            font-size: 16px;
+        }
+    }
+    .trezo-users-wrap {
+        gap: 10px;
+    }
+}
+
+/* Dark Mode Area Style
+============================================*/ 
+[class="dark"] {
+    .map {
+        opacity: 0.1;
+    }
+    .trezo-users-single-item {
+        box-shadow: none;
+        .icon {
+            background-color: $dark-card-bg !important;
+        }
+    }
+}

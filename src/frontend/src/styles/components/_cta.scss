@@ -1,0 +1,70 @@
+/* CTA Area Style
+============================================*/
+.cta-content {
+    max-width: 470px;
+    h2 {
+        font-size: 40px;
+        letter-spacing: -1px;
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 16px;
+    }
+    .btn {
+        margin-top: 20px;
+    }
+}
+.cta-wrap {
+    border-radius: 35px;
+    padding: 70px;
+} 
+
+/* Max width 767px */
+@media only screen and (max-width: 767px) {
+    .cta-content {
+        h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+        }
+        .btn {
+            margin-top: 10px;
+        }
+    }
+    .cta-wrap {
+        padding: 20px;
+        border-radius: 15px;
+    }
+}
+
+/* Min width 768px to Max width 992px */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .cta-content {
+        h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 15px;
+        }
+        .btn {
+            margin-top: 10px;
+        }
+    }
+    .cta-wrap {
+        padding: 30px;
+        border-radius: 20px;
+    }
+}
+
+/* Dark Mode Area Style
+============================================*/ 
+[class="dark"] {
+    .cta-wrap {
+        background-image: unset !important;
+        background-color: $dark-input-bg;
+    }
+}

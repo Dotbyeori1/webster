@@ -1,0 +1,58 @@
+// Color
+$body-font-family: "Inter", sans-serif;
+$body-color: #64748b;
+$body-color-50: #7a857d;
+$primary: #E36925;
+$primary-50: #275b96;
+$primary-100: #fd5812; 
+$primary-200: #ff6d57; 
+$primary-div: #ad63f6;
+$primary-div-50: #9135e8;
+$secondary: #3a4252;
+$secondary-50: #06201b;
+$secondary-60: #434e61;
+$info: #2db6f5;
+$success: #b1ff84;
+$success-60: #8bd466;
+$success-70: #00ba00;
+$warning: #fe7a36;
+$danger: #fd5812;
+$danger-40: #d71c00;
+$danger-50: #ee3e08;
+$danger-80: #ff4023;
+$danger-90: #c52b09;
+$danger-100: #fff5ed;
+$light: #d5d9e2;
+$gray: #f6f7f9;
+$gray-light: #ebebe0;
+$dark: #000000;
+$border-color: #eceef2;
+$border-color-50: #ecf0ff;
+$rating-color: #ef4335;
+$card-text-c: #ffe8d4;
+$gray-div: #f7f8f7;
+$gray-100: #f7f7f7;
+$gray-200: #f7f7f7;
+$gray-300: #f6f5f3;
+$transition: all ease 0.5s;
+$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+// For Dark Mode Color
+$dark-body-bg: #000000;
+$dark-body-color: #8695aa;
+$dark-card-bg: #0c1427;
+$dark-input-bg: #15203c;
+$dark-border: #172036;
+
+// Font Size
+$font-size-root: null;
+$font-size-base: 0.88rem; // Assumes the browser default, typically `16px`
+$font-size-sm: $font-size-base * 0.875;
+$font-size-lg: $font-size-base * 1.25;
+
+$h1-font-size: $font-size-base * 2.5; // Updated 43.2px
+$h2-font-size: $font-size-base * 2.3; // Updated 36.8px
+$h3-font-size: $font-size-base * 1.8; // Updated 28.8px
+$h4-font-size: $font-size-base * 1.4; // Updated 22.4px
+$h5-font-size: $font-size-base * 1; // Updated 17.6px
+$h6-font-size: $font-size-base; // Updated 16px
